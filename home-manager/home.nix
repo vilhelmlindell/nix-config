@@ -72,8 +72,14 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [ 
+    # Fonts
+    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly"]; })
+    font-awesome
+    powerline-fonts
+    powerline-symbols
+
     inputs.nixvim.packages.${system}.default
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+
     wireplumber
     powertop
     neofetch
