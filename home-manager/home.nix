@@ -20,8 +20,10 @@
     ./firefox.nix
     ./fish.nix
     ./starship.nix
+    ./i3status-rust.nix
 
     # You can also split up your configuration and import pieces of it here:
+    # ./nvim.nix
     # inputs.nix-colors.homeManagerModules.default
     # inputs.nixvim.nixosModules.nixvim
   ];

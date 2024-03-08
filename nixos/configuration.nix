@@ -126,6 +126,10 @@
     };
   };
 
+  # hardware.uinput.enable = true;
+  # users.groups.uinput.members = [ "vilhelm" ];
+  # users.groups.input.members = [ "vilhelm" ];
+
   # Enable automatic login for the user.
   services.getty.autologinUser = "vilhelm";
 
@@ -153,6 +157,8 @@
     displayManager = {
       defaultSession = "none+i3";
     };
+
+    xkbOptions = "ctrl:swapcaps";
 
     windowManager.i3 = {
       enable = true;
