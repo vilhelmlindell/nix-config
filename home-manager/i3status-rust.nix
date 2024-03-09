@@ -53,7 +53,7 @@ in
     bars = {
       ${barName} = {
         icons = "awesome6";
-        theme = config.colorschemePath;
+        theme = "theme.toml";
         blocks = [
           {
              block = "disk_space";

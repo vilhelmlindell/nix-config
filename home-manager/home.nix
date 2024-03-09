@@ -41,7 +41,6 @@ in
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
-  colorschemePath = colorschemePath;
 
   nixpkgs = {
     # You can add overlays here
