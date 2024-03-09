@@ -83,7 +83,7 @@ in
     TERMINAL = "wezterm";
   };
 
-  home.file.${colorschemeTomlFile}.text = colorschemeToml;
+  home.file.${colorschemeTomlPath}.text = colorschemeToml;
 
   # Add stuff for your user as you see fit:
 
