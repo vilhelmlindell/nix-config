@@ -22,7 +22,7 @@
   ];
 
   #colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
-  colorScheme = inputs.nix-colors.colorSchemes.${inputs.colorScheme};
+  colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
 
   nixpkgs = {
     # You can add overlays here
@@ -76,6 +76,7 @@
 
     inputs.nixvim.packages.${system}.default
     intel-gpu-tools
+    xclip
 
     wireplumber
     powertop
