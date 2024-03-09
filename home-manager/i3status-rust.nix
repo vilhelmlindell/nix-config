@@ -2,8 +2,8 @@
 
 let 
   barName = "bottom";
-  colorschemeTomlPath = "theme.toml";
-  colorschemeToml = ''
+  colorschemeName = "theme.toml";
+  colorscheme = ''
     idle_bg = "#${config.colorScheme.palette.base02}"
     idle_fg = "#${config.colorScheme.palette.base05}"
     info_bg = "#${config.colorScheme.palette.base0D}"
@@ -18,7 +18,7 @@ let
     separator_bg = "auto"
     separator_fg = "auto"
   '';
-  file = pkgs.writeText colorschemeTomlPath colorschemeToml;
+  colorschemeFile = pkgs.writeText colorschemeName colorscheme;
 in
 {
   xsession.windowManager.i3 = {
@@ -70,7 +70,7 @@ in
     bars = {
       ${barName} = {
         icons = "awesome6";
-        #theme = config.colorschemeTomlPath;
+        theme = colorschemeFile;
         blocks = [
           {
              block = "disk_space";

@@ -22,9 +22,7 @@
     ./i3status-rust.nix
   ];
 
-  #colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
   colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
-  #colorschemeTomlPath = colorschemeTomlPath;
 
   nixpkgs = {
     # You can add overlays here
