@@ -8,6 +8,24 @@
   pkgs,
   ...
 }: 
+let
+  colorschemePath = "~/.config/i3status-rust/themes/theme.toml";
+  colorscheme = ''
+    idle_bg = "#${config.colorScheme.palette.base02}"
+    idle_fg = "#${config.colorScheme.palette.base05}"
+    info_bg = "#${config.colorScheme.palette.base0D}"
+    info_fg = "#${config.colorScheme.palette.base00}"
+    good_bg = "#${config.colorScheme.palette.base0B}"
+    good_fg = "#${config.colorScheme.palette.base00}"
+    warning_bg = "#${config.colorScheme.palette.base0A}"
+    warning_fg = "#${config.colorScheme.palette.base00}"
+    critical_bg = "#${config.colorScheme.palette.base08}"
+    critical_fg = "#${config.colorScheme.palette.base00}"
+    separator = "\ue0b2"
+    separator_bg = "auto"
+    separator_fg = "auto"
+  '';
+in
 {
   # You can import other home-manager modules here
   imports = [
@@ -23,6 +41,7 @@
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
+  colorschemePath = colorschemePath;
 
   nixpkgs = {
     # You can add overlays here
@@ -62,6 +81,8 @@
     BROWSER = "firefox";
     TERMINAL = "wezterm";
   };
+
+  home.file.${colorschemePath}.text = colorscheme;
 
   #home.file.${colorschemeTomlPath}.text = colorschemeToml;
   #home.file."test.txt" = "Jag gillar bananer";
