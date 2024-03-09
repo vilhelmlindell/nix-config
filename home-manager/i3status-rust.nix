@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, outputs, ... }:
 
 let 
   barName = "bottom";
@@ -53,7 +53,7 @@ in
     bars = {
       ${barName} = {
         icons = "awesome6";
-        theme = "theme";
+        theme = outputs.colorScheme;
         blocks = [
           {
              block = "disk_space";

@@ -9,7 +9,7 @@
   ...
 }: 
 let
-  colorschemePath = "/home/vilhelm/.config/i3status-rust/themes/theme.toml";
+  colorschemePath = "/home/vilhelm/.config/i3status-rust/themes/${outputs.colorScheme}.toml";
   colorscheme = ''
     idle_bg = "#${config.colorScheme.palette.base02}"
     idle_fg = "#${config.colorScheme.palette.base05}"
