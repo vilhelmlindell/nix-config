@@ -18,7 +18,6 @@ let
     separator_fg = "auto"
   '';
   colorschemePath = "$XDG_CONFIG_HOME/i3status-rust/themes/theme.toml";
-  file = pkgs.writeText colorschemePath colorschemeToml;
 in
 {
   xsession.windowManager.i3 = {
@@ -236,6 +235,7 @@ in
       };
     };
   };
+  pkgs.writeText colorschemePath colorschemeToml;
 }
 
 
