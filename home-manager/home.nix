@@ -83,7 +83,8 @@ in
     TERMINAL = "wezterm";
   };
 
-  home.file.${colorschemeTomlPath}.text = colorschemeToml;
+  #home.file.${colorschemeTomlPath}.text = colorschemeToml;
+  home.file."test.txt" = "Jag gillar bananer";
 
   # Add stuff for your user as you see fit:
 
