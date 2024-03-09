@@ -823,11 +823,11 @@
         "tree-sitter-nu": "tree-sitter-nu_2"
       },
       "locked": {
-        "lastModified": 1710014756,
-        "narHash": "sha256-b0LQWMDLimGT0tM8Jn0iZI2p1fKC8k/70BCy2HFvBr0=",
+        "lastModified": 1710017060,
+        "narHash": "sha256-kxh+jszWX2swhJ3bQ1g4afT+yPw538jaRwYh48xxtno=",
         "owner": "vilhelmlindell",
         "repo": "nixvim-config",
-        "rev": "58c72a94fadca64d31ca95b777f3779241ae5ef1",
+        "rev": "19b51de6f845dac07b3444efec6b40d2ade9695d",
         "type": "github"
       },
       "original": {

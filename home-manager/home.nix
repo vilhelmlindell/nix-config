@@ -7,7 +7,26 @@
   config,
   pkgs,
   ...
-}: {
+}: 
+let
+  colorschemeToml = ''
+    idle_bg = "#${config.colorScheme.palette.base02}"
+    idle_fg = "#${config.colorScheme.palette.base05}"
+    info_bg = "#${config.colorScheme.palette.base0D}"
+    info_fg = "#${config.colorScheme.palette.base00}"
+    good_bg = "#${config.colorScheme.palette.base0B}"
+    good_fg = "#${config.colorScheme.palette.base00}"
+    warning_bg = "#${config.colorScheme.palette.base0A}"
+    warning_fg = "#${config.colorScheme.palette.base00}"
+    critical_bg = "#${config.colorScheme.palette.base08}"
+    critical_fg = "#${config.colorScheme.palette.base00}"
+    separator = "\ue0b2"
+    separator_bg = "auto"
+    separator_fg = "auto"
+  '';
+  colorschemeTomlPath = "theme.toml";
+in
+{
   # You can import other home-manager modules here
   imports = [
     inputs.nix-colors.homeManagerModules.default
@@ -23,6 +42,7 @@
 
   #colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
   colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
+  colorschemeTomlPath = colorschemeTomlPath;
 
   nixpkgs = {
     # You can add overlays here
@@ -62,6 +82,8 @@
     BROWSER = "firefox";
     TERMINAL = "wezterm";
   };
+
+  home.file.${colorschemeTomlFile}.text = colorschemeToml;
 
   # Add stuff for your user as you see fit:
 
