@@ -2,6 +2,23 @@
 
 let 
   barName = "bottom";
+  colorschemeTomlPath = "theme.toml";
+  colorschemeToml = ''
+    idle_bg = "#${config.colorScheme.palette.base02}"
+    idle_fg = "#${config.colorScheme.palette.base05}"
+    info_bg = "#${config.colorScheme.palette.base0D}"
+    info_fg = "#${config.colorScheme.palette.base00}"
+    good_bg = "#${config.colorScheme.palette.base0B}"
+    good_fg = "#${config.colorScheme.palette.base00}"
+    warning_bg = "#${config.colorScheme.palette.base0A}"
+    warning_fg = "#${config.colorScheme.palette.base00}"
+    critical_bg = "#${config.colorScheme.palette.base08}"
+    critical_fg = "#${config.colorScheme.palette.base00}"
+    separator = "\ue0b2"
+    separator_bg = "auto"
+    separator_fg = "auto"
+  '';
+  file = pkgs.writeText colorschemeTomlPath colorschemeToml;
 in
 {
   xsession.windowManager.i3 = {
