@@ -105,6 +105,8 @@
     variant = "";
   };
 
+  services.upower.enable = true;
+
   programs.fish.enable = true;
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
@@ -122,7 +124,7 @@
       ];
       shell = pkgs.fish;
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "video" ];
     };
   };
 
@@ -146,6 +148,7 @@
   };
 
   environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
+  environment.systemPackages = with pkgs; [ brightnessctl ];
 
   services.xserver = {
     enable = true;
@@ -166,7 +169,6 @@
         dmenu
         i3status
         i3lock
-        i3blocks
       ];
     };
   };
@@ -195,6 +197,11 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
       };
     };
   };
+
+  #system.activationScripts.script.text = ''
+  #  sudo chown root:video /sys/class/backlight/intel_backlight/brightness
+  #  sudo chmod 0664 /sys/class/backlight/intel_backlight/brightness
+  #'';
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.11";

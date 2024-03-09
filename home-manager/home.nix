@@ -10,10 +10,8 @@
 }: {
   # You can import other home-manager modules here
   imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
+    inputs.nix-colors.homeManagerModules.default
 
-    # Or modules exported from other flakes (such as nix-colors):
     ./wezterm.nix
     ./i3.nix
     ./git.nix
@@ -21,12 +19,10 @@
     ./fish.nix
     ./starship.nix
     ./i3status-rust.nix
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
-    # inputs.nix-colors.homeManagerModules.default
-    # inputs.nixvim.nixosModules.nixvim
   ];
+
+  #colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
+  colorScheme = inputs.nix-colors.colorSchemes.${inputs.colorScheme};
 
   nixpkgs = {
     # You can add overlays here
@@ -79,6 +75,7 @@
     powerline-symbols
 
     inputs.nixvim.packages.${system}.default
+    intel-gpu-tools
 
     wireplumber
     powertop

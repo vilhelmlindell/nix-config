@@ -1,3 +1,6 @@
+let 
+  colorScheme = "gruvbox-dark-medium";
+in
 {
   description = "Your new nix config";
 
@@ -14,6 +17,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim.url = "github:vilhelmlindell/nixvim-config";
+    nix-colors.url = "github:misterio77/nix-colors";
 
     # nixvim.url = "github:nix-community/nixvim";
     # nixvim.inputs.nixpkgs.follows = "nixpkgs";
@@ -62,15 +66,14 @@
     # Reusable home-manager modules you might want to export
     # These are usually stuff you would upstream into home-manager
     homeManagerModules = import ./modules/home-manager;
+    colorScheme = colorScheme;
 
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
-      # FIXME replace with your hostname
       t480 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          # > Our main nixos configuration file <
           ./nixos/configuration.nix
         ];
       };
