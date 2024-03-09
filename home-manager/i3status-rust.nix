@@ -53,7 +53,7 @@ in
     bars = {
       ${barName} = {
         icons = "awesome6";
-        theme = "theme.toml";
+        theme = "theme";
         blocks = [
           {
              block = "disk_space";
