@@ -1,7 +1,14 @@
-{ config, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 
 let
   mod = "Mod4";
+  nix-colors-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
+  wallpaperPath = nix-colors-lib.nixWallpaperFromScheme {
+    scheme = config.colorScheme;
+    width = 1920;
+    height = 1080;
+    logoScale = 5.0;
+  };
 in {
   xsession.windowManager.i3 = {
     enable = true;
@@ -59,6 +66,14 @@ in {
           childBorder = "#${config.colorScheme.palette.base03}";
         };
       };
+      startup = [
+        {
+          command =
+            "${pkgs.feh}/bin/feh --bg-fill ${wallpaperPath}";
+          always = true;
+          notification = false;
+        }
+      ];
     };
   };
 }

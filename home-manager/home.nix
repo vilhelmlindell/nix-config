@@ -1,6 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-{
+args@{
   inputs,
   outputs,
   lib,
@@ -36,9 +36,9 @@ in
     ./git.nix
     ./firefox.nix
     ./fish.nix
-    #./starship.nix
+    ./starship.nix
     ./i3status-rust.nix
-    ./oh-my-posh.nix
+    #./oh-my-posh.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
@@ -101,11 +101,14 @@ in
     inputs.nixvim.packages.${system}.default
     intel-gpu-tools
     xclip
-
+    ripgrep
     wireplumber
+    flavours
+    imagemagick
     powertop
     neofetch
     zoxide
+    feh
 
     steam 
   ];
