@@ -198,6 +198,10 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
     };
   };
 
+  services.auto-cpufreq = {
+    enable = true;
+  };
+
   #system.activationScripts.script.text = ''
   #  sudo chown root:video /sys/class/backlight/intel_backlight/brightness
   #  sudo chmod 0664 /sys/class/backlight/intel_backlight/brightness
