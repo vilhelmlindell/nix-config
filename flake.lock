@@ -2911,11 +2911,11 @@
         "tree-sitter-nu": "tree-sitter-nu_6"
       },
       "locked": {
-        "lastModified": 1710102672,
-        "narHash": "sha256-+G0HVpGjtMpLWMDIRl5x4H1+jBIu0RCExvla3i7Qges=",
+        "lastModified": 1710113872,
+        "narHash": "sha256-1FCTGH1xrerI/InaoyjjFQhXBWE2Yd8yi0MxyDUg58A=",
         "owner": "vilhelmlindell",
         "repo": "nixvim-config",
-        "rev": "a094930c3a6de2eef4e7581fea8654e2a8f11705",
+        "rev": "d9c3a5258fad30d37ebdc4dc404e070d537ee787",
         "type": "github"
       },
       "original": {
