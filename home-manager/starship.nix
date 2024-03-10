@@ -4,7 +4,7 @@
       flavour = "mocha"; # One of `latte`, `frappe`, `macchiato`, or `mocha`
     in
     {
-      enable = true;
+      enable = false;
       settings = {
         # Other config here
         format = "$all"; # Remove this line to disable the default prompt format

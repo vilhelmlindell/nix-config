@@ -36,8 +36,9 @@ in
     ./git.nix
     ./firefox.nix
     ./fish.nix
-    ./starship.nix
+    #./starship.nix
     ./i3status-rust.nix
+    ./oh-my-posh.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
