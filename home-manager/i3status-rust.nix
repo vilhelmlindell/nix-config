@@ -2,6 +2,7 @@
 
 let 
   barName = "bottom";
+  themeSeparator = "\ue0b2";
 in
 {
   xsession.windowManager.i3 = {
@@ -22,23 +23,23 @@ in
             separator = "#${config.colorScheme.palette.base02}";
 
             focusedWorkspace = { 
-              border = "#${config.colorScheme.palette.base04}";
-              background = "#${config.colorScheme.palette.base04}";
+              border = "#${config.colorScheme.palette.base02}";
+              background = "#${config.colorScheme.palette.base02}";
               text = "#${config.colorScheme.palette.base05}";
             };
             activeWorkspace = {
-              border = "#${config.colorScheme.palette.base02}";
-              background = "#${config.colorScheme.palette.base02}";
+              border = "#${config.colorScheme.palette.base00}";
+              background = "#${config.colorScheme.palette.base00}";
               text = "#${config.colorScheme.palette.base05}";
             };
             inactiveWorkspace = {
-              border = "#${config.colorScheme.palette.base02}";
-              background = "#${config.colorScheme.palette.base02}";
+              border = "#${config.colorScheme.palette.base00}";
+              background = "#${config.colorScheme.palette.base00}";
               text = "#${config.colorScheme.palette.base05}";
             };
             urgentWorkspace = {
-              border = "#${config.colorScheme.palette.base02}";
-              background = "#${config.colorScheme.palette.base02}";
+              border = "#${config.colorScheme.palette.base00}";
+              background = "#${config.colorScheme.palette.base00}";
               text = "#${config.colorScheme.palette.base05}";
             };
           };
@@ -123,10 +124,31 @@ in
              #  separator = themeSeparator;
              #};
            }
+           #{
+           #  block = "load";
+           #  interval = 1;
+           #  format = " $icon $1m ";
+           #   theme_overrides = {
+           #     idle_bg = "#${config.colorScheme.palette.base0B}ff";
+           #     idle_fg = "#${config.colorScheme.palette.base0B}00";
+           #     good_bg = "#${config.colorScheme.palette.base0B}ff";
+           #     good_fg = "#${config.colorScheme.palette.base0B}00";
+           #     warning_bg = "#${config.colorScheme.palette.base0B}ff";
+           #     warning_fg = "#${config.colorScheme.palette.base0B}00";
+           #     critical_bg = "#${config.colorScheme.palette.base0B}ff";
+           #     critical_fg = "#${config.colorScheme.palette.base0B}00";
+           #     info_bg = "#${config.colorScheme.palette.base0B}ff";
+           #     info_fg = "#${config.colorScheme.palette.base0B}00";
+           #     alternating_tint_bg = "#${config.colorScheme.palette.base0B}ff";
+           #     alternating_tint_fg = "#${config.colorScheme.palette.base0B}00";
+           #     separator_bg = "#${config.colorScheme.palette.base0B}ff";
+           #     separator_fg = "#${config.colorScheme.palette.base0B}00";
+           #     separator = themeSeparator;
+           #   };
+           #}
            {
-             block = "load";
-             interval = 1;
-             format = " $icon $1m ";
+             block = "backlight";
+             device = "intel_backlight";          
              #theme_overrides = {
              #  idle_bg = "#${config.colorScheme.palette.base0B}ff";
              #  idle_fg = "#${config.colorScheme.palette.base0B}00";
@@ -145,28 +167,24 @@ in
              #  separator = themeSeparator;
              #};
            }
-           {
-             block = "backlight";
-             device = "intel_backlight";          
-           }
            { 
              block = "sound"; 
              #theme_overrides = {
-               #idle_bg = "#${config.colorScheme.palette.base0C}ff";
-               #idle_fg = "#${config.colorScheme.palette.base0C}00";
-               #good_bg = "#${config.colorScheme.palette.base0C}ff";
-               #good_fg = "#${config.colorScheme.palette.base0C}00";
-               #warning_bg = "#${config.colorScheme.palette.base0C}ff";
-               #warning_fg = "#${config.colorScheme.palette.base0C}00";
-               #critical_bg = "#${config.colorScheme.palette.base0C}ff";
-               #critical_fg = "#${config.colorScheme.palette.base0C}00";
-               #info_bg = "#${config.colorScheme.palette.base0C}ff";
-               #info_fg = "#${config.colorScheme.palette.base0C}00";
-               #alternating_tint_bg = "#${config.colorScheme.palette.base0C}ff";
-               #alternating_tint_fg = "#${config.colorScheme.palette.base0C}00";
-               #separator_bg = "#${config.colorScheme.palette.base0C}ff";
-               #separator_fg = "#${config.colorScheme.palette.base0C}00";
-               #separator = themeSeparator;
+             #  idle_bg = "#${config.colorScheme.palette.base0C}ff";
+             #  idle_fg = "#${config.colorScheme.palette.base0C}00";
+             #  good_bg = "#${config.colorScheme.palette.base0C}ff";
+             #  good_fg = "#${config.colorScheme.palette.base0C}00";
+             #  warning_bg = "#${config.colorScheme.palette.base0C}ff";
+             #  warning_fg = "#${config.colorScheme.palette.base0C}00";
+             #  critical_bg = "#${config.colorScheme.palette.base0C}ff";
+             #  critical_fg = "#${config.colorScheme.palette.base0C}00";
+             #  info_bg = "#${config.colorScheme.palette.base0C}ff";
+             #  info_fg = "#${config.colorScheme.palette.base0C}00";
+             #  alternating_tint_bg = "#${config.colorScheme.palette.base0C}ff";
+             #  alternating_tint_fg = "#${config.colorScheme.palette.base0C}00";
+             #  separator_bg = "#${config.colorScheme.palette.base0C}ff";
+             #  separator_fg = "#${config.colorScheme.palette.base0C}00";
+             #  separator = themeSeparator;
              #};
            }
            {

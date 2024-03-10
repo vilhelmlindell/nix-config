@@ -9,6 +9,7 @@ let
     height = 1080;
     logoScale = 5.0;
   };
+  transparent = "#00000000";
 in {
   xsession.windowManager.i3 = {
     enable = true;
@@ -31,39 +32,39 @@ in {
         background = "#${config.colorScheme.palette.base00}";
 
         focused = {
-          border = "#${config.colorScheme.palette.base04}";
-          background = "#${config.colorScheme.palette.base02}";
+          border = "#${config.colorScheme.palette.base02}";
+          background = "#${config.colorScheme.palette.base00}";
           text = "#${config.colorScheme.palette.base05}";
-          indicator = "#${config.colorScheme.palette.base04}";
-          childBorder = "#${config.colorScheme.palette.base04}";
+          indicator = "#${config.colorScheme.palette.base02}";
+          childBorder = "#${config.colorScheme.palette.base02}";
         };
         focusedInactive = {
-          border = "#${config.colorScheme.palette.base02}";
+          border = "#${config.colorScheme.palette.base00}";
           background = "#${config.colorScheme.palette.base01}";
           text = "#${config.colorScheme.palette.base05}";
-          indicator = "#${config.colorScheme.palette.base03}";
-          childBorder = "#${config.colorScheme.palette.base03}";
+          indicator = "#${config.colorScheme.palette.base02}";
+          childBorder = transparent;
         };
         unfocused = {
-          border = "#${config.colorScheme.palette.base03}";
+          border = "#${config.colorScheme.palette.base00}";
           background = "#${config.colorScheme.palette.base01}";
           text = "#${config.colorScheme.palette.base05}";
-          indicator = "#${config.colorScheme.palette.base03}";
-          childBorder = "#${config.colorScheme.palette.base03}";
+          indicator = "#${config.colorScheme.palette.base00}";
+          childBorder = transparent;
         };
         urgent = {
-          border = "#${config.colorScheme.palette.base03}";
+          border = "#${config.colorScheme.palette.base00}";
           background = "#${config.colorScheme.palette.base01}";
           text = "#${config.colorScheme.palette.base05}";
-          indicator = "#${config.colorScheme.palette.base03}";
-          childBorder = "#${config.colorScheme.palette.base03}";
+          indicator = "#${config.colorScheme.palette.base00}";
+          childBorder = transparent;
         };
         placeholder = {
-          border = "#${config.colorScheme.palette.base03}";
+          border = "#${config.colorScheme.palette.base00}";
           background = "#${config.colorScheme.palette.base01}";
           text = "#${config.colorScheme.palette.base05}";
-          indicator = "#${config.colorScheme.palette.base03}";
-          childBorder = "#${config.colorScheme.palette.base03}";
+          indicator = "#${config.colorScheme.palette.base00}";
+          childBorder = transparent;
         };
       };
       startup = [

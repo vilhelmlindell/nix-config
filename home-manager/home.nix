@@ -1,6 +1,6 @@
 # This is your home-manager configuration file
 # Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
-args@{
+{
   inputs,
   outputs,
   lib,
@@ -21,7 +21,8 @@ let
     warning_fg = "#${config.colorScheme.palette.base00}"
     critical_bg = "#${config.colorScheme.palette.base08}"
     critical_fg = "#${config.colorScheme.palette.base00}"
-    separator = "\ue0b2"
+    separator = ""
+    end_separator = ""
     separator_bg = "auto"
     separator_fg = "auto"
   '';
@@ -38,7 +39,6 @@ in
     ./fish.nix
     ./starship.nix
     ./i3status-rust.nix
-    #./oh-my-posh.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
