@@ -100,17 +100,19 @@ in
 
     inputs.nixvim.packages.${system}.default
     intel-gpu-tools
-    xclip
-    ripgrep
+    steam 
     wireplumber
-    flavours
+    xclip
+
+    # awesome cli tools
+    ripgrep
     imagemagick
     powertop
+    feh
+    fzf
     neofetch
     zoxide
-    feh
-
-    steam 
+    lshw
   ];
 
   # Enable home-manager
