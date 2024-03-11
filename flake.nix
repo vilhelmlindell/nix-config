@@ -16,6 +16,7 @@
     nixvim.url = "github:vilhelmlindell/nixvim-config";
     nix-colors.url = "github:misterio77/nix-colors";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     # nixvim.url = "github:nix-community/nixvim";
     # nixvim.inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +34,7 @@
   outputs = {
     self,
     nixpkgs,
+    nixos-hardware,
     home-manager,
     ...
   } @ inputs: let
@@ -72,6 +74,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/configuration.nix
+          nixos-hardware.nixosModules.t480
         ];
       };
     };
