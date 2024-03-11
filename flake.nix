@@ -74,7 +74,7 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/configuration.nix
-          nixos-hardware.nixosModules.t480
+          nixos-hardware.nixosModules.lenovo-thinkpad-t480
         ];
       };
     };
