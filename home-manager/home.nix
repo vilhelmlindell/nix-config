@@ -101,6 +101,7 @@ in
     inputs.nixvim.packages.${system}.default
     intel-gpu-tools
     steam 
+    lutris
     wireplumber
     xclip
 
@@ -113,6 +114,8 @@ in
     neofetch
     zoxide
     lshw
+
+    (import ./scripts/nvidia-offload.nix { inherit pkgs; })
   ];
 
   # Enable home-manager
