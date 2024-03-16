@@ -13,7 +13,7 @@ in
           fonts = {
             names = [  "JetBrainsMonoNLNerdFont" "FontAwesome6Free"];
             style = "Regular";
-            size = 16.0;
+            size = 13.0;
           };
           position = "bottom";
           statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ~/.config/i3status-rust/config-${barName}.toml";
