@@ -39,6 +39,7 @@ in
     ./fish.nix
     ./starship.nix
     ./i3status-rust.nix
+    ./zellij.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
@@ -114,6 +115,7 @@ in
     neofetch
     zoxide
     lshw
+    python3
 
     (import ./scripts/nvidia-offload.nix { inherit pkgs; })
   ];
