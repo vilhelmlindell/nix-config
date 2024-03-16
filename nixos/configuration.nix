@@ -106,8 +106,6 @@
     variant = "";
   };
 
-  services.upower.enable = true;
-
   programs.fish.enable = true;
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
@@ -199,8 +197,17 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
     };
   };
 
-  services.auto-cpufreq = {
-    enable = true;
+  #services.auto-cpufreq = {
+  #  enable = true;
+  #};
+  services.thermald.enable = true;
+  services.tlp = {
+    settings = {
+      CPU_BOOST_ON_AC = 1;
+      CPU_BOOST_ON_BAT = 0;
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+    };
   };
 
   #system.activationScripts.script.text = ''
