@@ -129,6 +129,8 @@
     };
   };
 
+  hardware.bluetooth.enable = true;
+
   # hardware.uinput.enable = true;
   # users.groups.uinput.members = [ "vilhelm" ];
   # users.groups.input.members = [ "vilhelm" ];

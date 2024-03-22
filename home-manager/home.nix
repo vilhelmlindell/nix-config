@@ -102,6 +102,8 @@ in
     inputs.nixvim.packages.${system}.default
     intel-gpu-tools
     steam 
+    blueberry
+    immersed-vr
     lutris
     wireplumber
     xclip
