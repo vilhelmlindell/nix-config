@@ -118,6 +118,8 @@ in
     zoxide
     lshw
     python3
+    maven
+    godot_4
 
     (import ./scripts/nvidia-offload.nix { inherit pkgs; })
   ];
