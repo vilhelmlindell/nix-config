@@ -7,8 +7,7 @@
   config,
   pkgs,
   ...
-}: 
-let
+}: let
   colorschemePath = "/home/vilhelm/.config/i3status-rust/themes/${outputs.colorScheme}.toml";
   colorscheme = ''
     idle_bg = "#${config.colorScheme.palette.base02}"
@@ -26,8 +25,7 @@ let
     separator_bg = "auto"
     separator_fg = "auto"
   '';
-in
-{
+in {
   # You can import other home-manager modules here
   imports = [
     inputs.nix-colors.homeManagerModules.default
@@ -66,7 +64,7 @@ in
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942 
+      # Workaround for https://github.com/nix-community/home-manager/issues/2942
       allowUnfreePredicate = _: true;
     };
   };
@@ -92,16 +90,16 @@ in
 
   fonts.fontconfig.enable = true;
 
-  home.packages = with pkgs; [ 
+  home.packages = with pkgs; [
     # Fonts
-    (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" "NerdFontsSymbolsOnly"]; })
+    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
     font-awesome
     powerline-fonts
     powerline-symbols
 
     inputs.nixvim.packages.${system}.default
     intel-gpu-tools
-    steam 
+    steam
     blueberry
     immersed-vr
     lutris
@@ -120,8 +118,14 @@ in
     python3
     maven
     godot_4
+    (wineWowPackages.full.override {
+      wineRelease = "staging";
+      mingwSupport = true;
+    })
+    winetricks
 
-    (import ./scripts/nvidia-offload.nix { inherit pkgs; })
+    (import ./scripts/nvidia-offload.nix {inherit pkgs;})
+    (import ./scripts/wine64.nix {inherit pkgs;})
   ];
 
   # Enable home-manager
@@ -133,4 +137,3 @@ in
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.11";
 }
-
