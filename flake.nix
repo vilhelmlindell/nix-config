@@ -77,7 +77,8 @@
     };
 
     #colorScheme = "gruvbox-dark-medium";
-    colorScheme = "catppuccin-mocha";
+    #colorScheme = "catppuccin-mocha";
+    colorScheme = "toky-night-dark";
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
