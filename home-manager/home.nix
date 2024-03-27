@@ -38,6 +38,7 @@ in {
     ./starship.nix
     ./i3status-rust.nix
     ./zellij.nix
+    ./direnv.nix
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.${outputs.colorScheme};
@@ -128,10 +129,7 @@ in {
     })
     winetricks
     gcc
-    cargo-cross
-    rust-analyzer
-    dot
-    cargo
+    graphviz
 
     (import ./scripts/nvidia-offload.nix {inherit pkgs;})
   ];

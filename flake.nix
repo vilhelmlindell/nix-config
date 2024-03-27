@@ -76,8 +76,8 @@
       };
     };
 
-    #colorScheme = "gruvbox-dark-medium";
-    colorScheme = "onedark";
+    colorScheme = "gruvbox-dark-medium";
+    #colorScheme = "onedark";
 
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
