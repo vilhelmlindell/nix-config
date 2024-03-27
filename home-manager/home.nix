@@ -79,6 +79,10 @@ in {
     EDITOR = "nvim";
     BROWSER = "firefox";
     TERMINAL = "wezterm";
+    NIX_STORE = "/nix/store";
+    STARCRAFT = "/home/vilhelm/.wine/drive_c/StarCraft/";
+    #WINEARCH = "win64";
+    #WINEPREFIX = "/home/vilhelm/.wine64";
   };
 
   home.file.${colorschemePath}.text = colorscheme;
@@ -123,7 +127,6 @@ in {
       mingwSupport = true;
     })
     winetricks
-    rustup
     gcc
     cargo-cross
 
