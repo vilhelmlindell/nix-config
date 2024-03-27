@@ -129,6 +129,9 @@ in {
     winetricks
     gcc
     cargo-cross
+    rust-analyzer
+    dot
+    cargo
 
     (import ./scripts/nvidia-offload.nix {inherit pkgs;})
   ];
