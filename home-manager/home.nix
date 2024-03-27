@@ -123,9 +123,11 @@ in {
       mingwSupport = true;
     })
     winetricks
+    rustup
+    gcc
+    cargo-cross
 
     (import ./scripts/nvidia-offload.nix {inherit pkgs;})
-    (import ./scripts/wine64.nix {inherit pkgs;})
   ];
 
   # Enable home-manager

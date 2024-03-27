@@ -70,7 +70,7 @@
     experimental-features = "nix-command flakes";
     # Deduplicate and optimize nix store
     auto-optimise-store = true;
-    trusted-users = [ "vilhelm" ];
+    trusted-users = ["vilhelm"];
   };
 
   # FIXME: Add the rest of your current configuration
@@ -110,6 +110,7 @@
 
   programs.fish.enable = true;
   programs.adb.enable = true;
+  virtualisation.docker.enable = true;
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
   users.users = {
@@ -126,7 +127,7 @@
       ];
       shell = pkgs.fish;
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "networkmanager" "wheel" "video" ];
+      extraGroups = ["networkmanager" "wheel" "video"];
     };
   };
 
@@ -151,8 +152,8 @@
     };
   };
 
-  environment.pathsToLink = [ "/libexec" ]; # links /libexec from derivations to /run/current-system/sw
-  environment.systemPackages = with pkgs; [ brightnessctl ];
+  environment.pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
+  environment.systemPackages = with pkgs; [brightnessctl];
 
   services.xserver = {
     enable = true;
@@ -227,12 +228,12 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
   services.auto-cpufreq.enable = true;
   services.auto-cpufreq.settings = {
     battery = {
-       governor = "powersave";
-       turbo = "never";
+      governor = "powersave";
+      turbo = "never";
     };
     charger = {
-       governor = "performance";
-       turbo = "auto";
+      governor = "performance";
+      turbo = "auto";
     };
   };
 
