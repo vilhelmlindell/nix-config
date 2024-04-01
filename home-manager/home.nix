@@ -129,7 +129,9 @@ in {
     })
     winetricks
     gcc
+    cmake
     graphviz
+    linuxKernel.packages.linux_zen.perf
 
     (import ./scripts/nvidia-offload.nix {inherit pkgs;})
   ];

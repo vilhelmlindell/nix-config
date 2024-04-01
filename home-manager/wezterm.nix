@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   programs.wezterm = {
     enable = true;
     extraConfig = ''
@@ -38,7 +36,7 @@
           selection_bg = "#${config.colorScheme.palette.base05}",
           selection_fg = "#${config.colorScheme.palette.base00}",
         },
-      } 
+      }
     '';
   };
 }
