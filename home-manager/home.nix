@@ -132,6 +132,8 @@ in {
     cmake
     graphviz
     linuxKernel.packages.linux_zen.perf
+    libreoffice
+    obsidian
 
     (import ./scripts/nvidia-offload.nix {inherit pkgs;})
   ];
