@@ -47,33 +47,38 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      permittedInsecurePackages = [
-        "electron-25.9.0"
-      ];
+      permittedInsecurePackages = lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
+    };
+  };
+  nix = {
+    # This will add each flake input as a registry
+    # To make nix3 commands consistent with your flake
+    registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+
+    # This will additionally add your inputs to the system's legacy channels
+    # Making legacy nix commands consistent as well, awesome!
+    nixPath = ["/etc/nix/path"];
+
+    settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+      # Deduplicate and optimize nix store
+      auto-optimise-store = true;
+      trusted-users = ["vilhelm"];
     };
   };
 
-  # This will add each flake input as a registry
-  # To make nix3 commands consistent with your flake
-  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
+  environment = {
+    etc =
+      lib.mapAttrs'
+      (name: value: {
+        name = "nix/path/${name}";
+        value.source = value.flake;
+      })
+      config.nix.registry;
 
-  # This will additionally add your inputs to the system's legacy channels
-  # Making legacy nix commands consistent as well, awesome!
-  nix.nixPath = ["/etc/nix/path"];
-  environment.etc =
-    lib.mapAttrs'
-    (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
-
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
-    trusted-users = ["vilhelm"];
+    pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
+    systemPackages = with pkgs; [brightnessctl];
   };
 
   # FIXME: Add the rest of your current configuration
@@ -103,16 +108,117 @@
   # TODO: Set your hostname
   networking.hostName = "t480";
   networking.networkmanager.enable = true;
+  services = {
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
 
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+    upower.enable = true;
+
+    # hardware.uinput.enable = true;
+    # users.groups.uinput.members = [ "vilhelm" ];
+    # users.groups.input.members = [ "vilhelm" ];
+
+    # Enable automatic login for the user.
+    getty.autologinUser = "vilhelm";
+
+    # This setups a SSH server. Very important if you're setting up a headless system.
+    # Feel free to remove if you don't need it.
+    openssh = {
+      enable = true;
+      settings = {
+        # Forbid root login through SSH.
+        PermitRootLogin = "no";
+        # Use keys only. Remove if you want to SSH using password (not recommended)
+        PasswordAuthentication = false;
+      };
+    };
+
+    xserver = {
+      enable = true;
+
+      desktopManager = {
+        xterm.enable = false;
+      };
+
+      displayManager = {
+        defaultSession = "none+i3";
+      };
+
+      xkbOptions = "ctrl:swapcaps";
+
+      windowManager.i3 = {
+        enable = true;
+        extraPackages = with pkgs; [
+          dmenu
+          i3status
+          i3lock
+        ];
+      };
+    };
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
+    };
+
+    #services.thermald.enable = true;
+    #services.tlp = {
+    #  enable = true;
+    #  settings = {
+    #    CPU_SCALING_GOVERNOR_ON_AC = "performance";
+    #    CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+    #    CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+    #    CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+    #    CPU_MIN_PERF_ON_AC = 0;
+    #    CPU_MAX_PERF_ON_AC = 100;
+    #    CPU_MIN_PERF_ON_BAT = 0;
+    #    CPU_MAX_PERF_ON_BAT = 20;
+
+    #   #Optional helps save long term battery health
+    #   START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
+    #   STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+
+    #  };
+    #};
+
+    auto-cpufreq.enable = true;
+    auto-cpufreq.settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
   };
+  programs = {
+    fish.enable = true;
+    adb.enable = true;
 
-  services.upower.enable = true;
-
-  programs.fish.enable = true;
-  programs.adb.enable = true;
+    ssh = {
+      knownHosts = {
+        github = {
+          hostNames = ["github.com"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkMPyR8oEZRq6
+EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
+        };
+        gitlab = {
+          hostNames = ["gitlab.com"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkMPyR8oEZRq6
+EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
+        };
+      };
+    };
+  };
   virtualisation.docker.enable = true;
 
   # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
@@ -136,109 +242,7 @@
 
   hardware.bluetooth.enable = true;
 
-  # hardware.uinput.enable = true;
-  # users.groups.uinput.members = [ "vilhelm" ];
-  # users.groups.input.members = [ "vilhelm" ];
-
-  # Enable automatic login for the user.
-  services.getty.autologinUser = "vilhelm";
-
-  # This setups a SSH server. Very important if you're setting up a headless system.
-  # Feel free to remove if you don't need it.
-  services.openssh = {
-    enable = true;
-    settings = {
-      # Forbid root login through SSH.
-      PermitRootLogin = "no";
-      # Use keys only. Remove if you want to SSH using password (not recommended)
-      PasswordAuthentication = false;
-    };
-  };
-
-  environment.pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
-  environment.systemPackages = with pkgs; [brightnessctl];
-
-  services.xserver = {
-    enable = true;
-
-    desktopManager = {
-      xterm.enable = false;
-    };
-
-    displayManager = {
-      defaultSession = "none+i3";
-    };
-
-    xkbOptions = "ctrl:swapcaps";
-
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        dmenu
-        i3status
-        i3lock
-      ];
-    };
-  };
-
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-  };
-
-  programs.ssh = {
-    knownHosts = {
-      github = {
-        hostNames = ["github.com"];
-        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkMPyR8oEZRq6
-EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
-      };
-      gitlab = {
-        hostNames = ["gitlab.com"];
-        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkMPyR8oEZRq6
-EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
-      };
-    };
-  };
-
-  #services.thermald.enable = true;
-  #services.tlp = {
-  #  enable = true;
-  #  settings = {
-  #    CPU_SCALING_GOVERNOR_ON_AC = "performance";
-  #    CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-  #    CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-  #    CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-  #    CPU_MIN_PERF_ON_AC = 0;
-  #    CPU_MAX_PERF_ON_AC = 100;
-  #    CPU_MIN_PERF_ON_BAT = 0;
-  #    CPU_MAX_PERF_ON_BAT = 20;
-
-  #   #Optional helps save long term battery health
-  #   START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
-  #   STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-
-  #  };
-  #};
-
-  services.auto-cpufreq.enable = true;
-  services.auto-cpufreq.settings = {
-    battery = {
-      governor = "powersave";
-      turbo = "never";
-    };
-    charger = {
-      governor = "performance";
-      turbo = "auto";
-    };
-  };
 
   #system.activationScripts.script.text = ''
   #  sudo chown root:video /sys/class/backlight/intel_backlight/brightness
