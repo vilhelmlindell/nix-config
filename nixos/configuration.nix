@@ -47,6 +47,7 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      allowInsecure = true;
     };
   };
 
@@ -132,10 +133,6 @@
   };
 
   hardware.bluetooth.enable = true;
-
-  permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
 
   # hardware.uinput.enable = true;
   # users.groups.uinput.members = [ "vilhelm" ];
