@@ -1,6 +1,9 @@
-{config, ...}: let
-  configPath = builtins.toPath "${config}/features/cli/zellij/config.kdl";
-  layoutPath = builtins.toPath "${config}/features/cli/zellij/layout.kdl";
+{ config, ... }:
+{
+  #configPath = builtins.toPath "${config}/features/cli/zellij/config.kdl";
+  #layoutPath = builtins.toPath "${config}/features/cli/zellij/layout.kdl";
+  configPath = "/home/vilhelm/nix-config/home-manager/vilhelm/features/cli/zellij/config.kdl";
+  layoutPath = "/home/vilhelm/nix-config/home-manager/vilhelm/features/cli/zellij/layout.kdl";
 
   layoutKdl = ''
     layout {
@@ -368,10 +371,4 @@
     //
     // styled_underlines true
   '';
-in {
-  inherit configPath;
-  inherit layoutPath;
-
-  home.file.${configPath}.text = configKdl;
-  home.file.${layoutPath}.text = layoutKdl;
 }

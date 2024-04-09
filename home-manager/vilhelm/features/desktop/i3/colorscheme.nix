@@ -1,5 +1,5 @@
 {config, ...}: {
-  path = "/home/vilhelm/nix-config/home-manager/created-files/i3status-rust/base16.toml";
+  path = "/home/vilhelm/nix-config/home-manager/vilhelm/features/desktop/i3/base16.toml";
   toml = ''
     idle_bg = "#${config.colorScheme.palette.base02}"
     idle_fg = "#${config.colorScheme.palette.base05}"

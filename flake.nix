@@ -13,7 +13,7 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixvim.url = "path:/home/vilhelm/nix-config/nixvim-config";
+    nixvim.url = "path:/home/vilhelm/nix-config/home-manager/vilhelm/features/cli/nixvim-config";
     nix-colors.url = "github:misterio77/nix-colors";
 
     # nixvim.url = "github:nix-community/nixvim";
@@ -23,10 +23,6 @@
 
     # TODO: Add any other flake you might need
     # hardware.url = "github:nixos/nixos-hardware";
-
-    # Shameless plug: looking for a way to nixify your themes and make
-    # everything match nicely? Try nix-colors!
-    # nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = {
@@ -66,7 +62,7 @@
     homeManagerModules = import ./modules/home-manager;
 
     # NixOS configuration entrypoint
-    # Available through 'nixos-rebuild --flake .#your-hostname'
+    # Available through 'sudo nixos-rebuild --flake .#your-hostname'
     nixosConfigurations = {
       mars = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
@@ -85,12 +81,10 @@
     # Standalone home-manager configuration entrypoint
     # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
-      # FIXME replace with your username@hostname
       "vilhelm@mars" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          # > Our main home-manager configuration file <
           ./home-manager/vilhelm/mars.nix
         ];
       };
@@ -98,7 +92,6 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
-          # > Our main home-manager configuration file <
           ./home-manager/vilhelm/apollo.nix
         ];
       };

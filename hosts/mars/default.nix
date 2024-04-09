@@ -68,7 +68,7 @@
       config.nix.registry;
 
     pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
-    systemPackages = with pkgs; [brightnessctl];
+    systemPackages = with pkgs; [];
   };
 
   # Set your time zone.

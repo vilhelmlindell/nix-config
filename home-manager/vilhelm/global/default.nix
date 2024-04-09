@@ -70,38 +70,38 @@
     powerline-fonts
     powerline-symbols
 
-    inputs.nixvim.packages.${system}.default
-    intel-gpu-tools
-    steam
-    blueberry
-    immersed-vr
-    lutris
-    wireplumber
-    xclip
+    #inputs.nixvim.packages.${system}.default
+    #intel-gpu-tools
+    #steam
+    #blueberry
+    #immersed-vr
+    #lutris
+    #wireplumber
+    #xclip
 
     # awesome cli tools
-    ripgrep
-    imagemagick
-    powertop
-    feh
-    fzf
-    neofetch
-    lshw
-    python3
-    maven
-    godot_4
-    (wineWowPackages.full.override {
-      wineRelease = "staging";
-      mingwSupport = true;
-    })
-    winetricks
-    gcc
-    cmake
-    graphviz
-    linuxKernel.packages.linux_zen.perf
-    libreoffice
-    obsidian
-    cutechess
+    #ripgrep
+    #imagemagick
+    #powertop
+    #feh
+    #fzf
+    #neofetch
+    #lshw
+    #python3
+    #maven
+    #godot_4
+    #(wineWowPackages.full.override {
+    #  wineRelease = "staging";
+    # mingwSupport = true;
+    #)
+    #winetricks
+    #gcc
+    #cmake
+    #graphviz
+    #linuxKernel.packages.linux_zen.perf
+    #libreoffice
+    #obsidian
+    #cutechess
     zellij
 
     #(import ./scripts/nvidia-offload.nix {inherit pkgs;})
