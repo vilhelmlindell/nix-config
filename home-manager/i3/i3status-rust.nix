@@ -4,7 +4,7 @@
   ...
 }: let
   barName = "bottom";
-  colorSchemePath = import ./colorscheme.nix {inherit config;};
+  i3statusColorScheme = import ./colorscheme.nix {inherit config;};
 in {
   xsession.windowManager.i3 = {
     enable = true;
@@ -54,7 +54,7 @@ in {
     bars = {
       ${barName} = {
         icons = "awesome6";
-        theme = colorSchemePath;
+        theme = i3statusColorScheme.path;
         blocks = [
           {
             block = "disk_space";

@@ -4,7 +4,7 @@
     extraConfig = ''
       return {
         font = wezterm.font("JetBrainsMonoNL Nerd Font"),
-        font_size = 16.0,
+        font_size = 15.0,
         enable_tab_bar = false,
         colors = {
           ansi = {

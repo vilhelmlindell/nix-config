@@ -1,9 +1,6 @@
-{config, ...}: let
-  colorSchemeName = "base16";
-in {
-  inherit colorSchemeName;
-  colorSchemePath = "/home/vilhelm/nix-config/home-manager/created-files/i3status-rust/${colorSchemeName}.toml";
-  colorSchemeToml = ''
+{config, ...}: {
+  path = "/home/vilhelm/nix-config/home-manager/created-files/i3status-rust/base16.toml";
+  toml = ''
     idle_bg = "#${config.colorScheme.palette.base02}"
     idle_fg = "#${config.colorScheme.palette.base05}"
     info_bg = "#${config.colorScheme.palette.base0D}"

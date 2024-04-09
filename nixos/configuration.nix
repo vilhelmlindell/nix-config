@@ -47,7 +47,6 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
-      permittedInsecurePackages = lib.optional (pkgs.obsidian.version == "1.4.16") "electron-25.9.0";
     };
   };
   nix = {
@@ -65,6 +64,12 @@
       # Deduplicate and optimize nix store
       auto-optimise-store = true;
       trusted-users = ["vilhelm"];
+      trusted-public-keys = [
+        "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
+      ];
+      substituters = [
+        "https://cache.iog.io"
+      ];
     };
   };
 
