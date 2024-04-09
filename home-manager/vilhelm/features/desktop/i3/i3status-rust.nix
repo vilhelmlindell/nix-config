@@ -6,6 +6,8 @@
   barName = "bottom";
   i3statusColorScheme = import ./colorscheme.nix {inherit config;};
 in {
+  home.file.${i3statusColorScheme.path}.text = i3statusColorScheme.toml;
+
   xsession.windowManager.i3 = {
     enable = true;
     config = {

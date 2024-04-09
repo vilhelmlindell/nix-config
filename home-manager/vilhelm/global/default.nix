@@ -7,23 +7,12 @@
   config,
   pkgs,
   ...
-}: let
-  zellijConfig = import ./zellij.nix {inherit config;};
-  i3statusColorScheme = import ./i3/colorscheme.nix {inherit config;};
-in {
+}: {
   # You can import other home-manager modules here
   imports = [
     inputs.nix-colors.homeManagerModules.default
 
-    ./wezterm.nix
-    ./i3/i3.nix
-    ./i3/i3status-rust.nix
-    ./git.nix
-    ./firefox.nix
-    ./fish.nix
-    ./starship.nix
-    ./direnv.nix
-    ./zoxide.nix
+    ../features/cli
   ];
 
   colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
@@ -48,16 +37,13 @@ in {
     ];
     # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
-      # Workaround for https://github.com/nix-community/home-manager/issues/2942
       permittedInsecurePackages = [
         "electron-25.9.0"
       ];
     };
   };
 
-  # TODO: Set your username
   home = {
     username = "vilhelm";
     homeDirectory = "/home/vilhelm";
@@ -68,14 +54,10 @@ in {
     BROWSER = "firefox";
     TERMINAL = "wezterm";
     NIX_STORE = "/nix/store";
-    STARCRAFT = "/home/vilhelm/.wine/drive_c/StarCraft/";
+    #STARCRAFT = "/home/vilhelm/.wine/drive_c/StarCraft/";
     #WINEARCH = "win64";
     #WINEPREFIX = "/home/vilhelm/.wine64";
   };
-
-  home.file.${zellijConfig.configPath}.text = zellijConfig.configKdl;
-  home.file.${zellijConfig.layoutPath}.text = zellijConfig.layoutKdl;
-  home.file.${i3statusColorScheme.path}.text = i3statusColorScheme.toml;
 
   # Add stuff for your user as you see fit:
 
@@ -122,11 +104,13 @@ in {
     cutechess
     zellij
 
-    (import ./scripts/nvidia-offload.nix {inherit pkgs;})
+    #(import ./scripts/nvidia-offload.nix {inherit pkgs;})
   ];
 
-  # Enable home-manager
-  programs.home-manager.enable = true;
+  programs = {
+    home-manager.enable = true;
+    git.enable = true;
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
