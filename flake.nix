@@ -13,7 +13,7 @@
     home-manager.url = "github:nix-community/home-manager/release-23.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixvim.url = "path:/home/vilhelm/nix-config/home-manager/vilhelm/features/cli/nixvim-config";
+    nixvim.url = "github:vilhelmlindell/nixvim-config";
     nix-colors.url = "github:misterio77/nix-colors";
 
     # nixvim.url = "github:nix-community/nixvim";

@@ -13,6 +13,6 @@
   ];
 
   home.packages = [
-    inputs.nixvim.packages.${system}.default
+    inputs.nixvim.packages."x86_64-linux".default
   ];
 }
