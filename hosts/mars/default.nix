@@ -68,7 +68,24 @@
       config.nix.registry;
 
     pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
-    systemPackages = with pkgs; [];
+    systemPackages = with pkgs; [
+      #gcc
+      #mesa
+      #xorg.libX11
+      #xorg.libXrandr
+      #xorg.libXcursor
+      #xorg.libXinerama
+      #xorg.libXi
+      #xorg.libXxf86vm
+      #xorg.libXext # for Xge.h
+      #xorg.libxcb
+      #libGL
+      #alsa-lib
+      #pkg-config
+    ];
+    sessionVariables = {
+      LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
+    };
   };
 
   # Set your time zone.
@@ -186,7 +203,6 @@
   };
   programs = {
     fish.enable = true;
-    adb.enable = true;
 
     ssh = {
       knownHosts = {
@@ -219,12 +235,56 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINkMPyR8oEZRq6EFSql1ch1ub5+O8eWzPXPWTLrRZx4a vilhelm.lindell123@gmail.com"
       ];
       shell = pkgs.fish;
+      packages = with pkgs; [
+        home-manager
+      ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
       extraGroups = ["networkmanager" "wheel" "video" "docker" "cargo"];
     };
   };
 
-  hardware.bluetooth.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      #package = (import /srv/nixpkgs-mesa {}).pkgs.mesa.drivers;
+    }; # or "nvidiaLegacy470 etc.
+
+    nvidia = {
+      # Modesetting is required.
+      modesetting.enable = true;
+
+      # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+      # Enable this if you have graphical corruption issues or application crashes after waking
+      # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
+      # of just the bare essentials.
+      powerManagement.enable = false;
+
+      # Fine-grained power management. Turns off GPU when not in use.
+      # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+      powerManagement.finegrained = false;
+
+      # Use the NVidia open source kernel module (not to be confused with the
+      # independent third-party "nouveau" open source driver).
+      # Support is limited to the Turing and later architectures. Full list of
+      # supported GPUs is at:
+      # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+      # Only available from driver 515.43.04+
+      # Currently alpha-quality/buggy, so false is currently the recommended setting.
+      open = false;
+
+      # Enable the Nvidia settings menu,
+      # accessible via `nvidia-settings`.
+      nvidiaSettings = true;
+
+      # Optionally, you may need to select the appropriate driver version for your specific GPU.
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+  };
+  services.xserver.videoDrivers = ["nvidia"];
 
   security.rtkit.enable = true;
 

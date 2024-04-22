@@ -1,6 +1,7 @@
 {
   inputs,
   system,
+  pkgs,
   ...
 }: {
   imports = [
@@ -12,7 +13,10 @@
     ./zoxide.nix
   ];
 
-  home.packages = [
+  home.packages = with pkgs; [
     inputs.nixvim.packages."x86_64-linux".default
+    ripgrep
+    xclip
+    python3
   ];
 }
