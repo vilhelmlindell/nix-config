@@ -69,23 +69,8 @@
 
     pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
     systemPackages = with pkgs; [
-      #gcc
-      #mesa
-      #xorg.libX11
-      #xorg.libXrandr
-      #xorg.libXcursor
-      #xorg.libXinerama
-      #xorg.libXi
-      #xorg.libXxf86vm
-      #xorg.libXext # for Xge.h
-      #xorg.libxcb
-      #libGL
-      #alsa-lib
-      #pkg-config
+      alsa-lib
     ];
-    sessionVariables = {
-      LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
-    };
   };
 
   # Set your time zone.
@@ -284,7 +269,7 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
   };
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = ["intel"];
 
   security.rtkit.enable = true;
 
