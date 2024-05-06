@@ -7,7 +7,15 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec "$@"
+  '';
+in {
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -69,7 +77,28 @@
 
     pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
     systemPackages = with pkgs; [
-      alsa-lib
+      nvidia-offload
+
+      ## support both 32- and 64-bit applications
+      #wineWowPackages.stable
+
+      ## support 32-bit only
+      #wine
+
+      ## support 64-bit only
+      #(wine.override {wineBuild = "wine64";})
+
+      ## support 64-bit only
+      #wine64
+
+      ## wine-staging (version with experimental features)
+      #wineWowPackages.staging
+
+      ## winetricks (all versions)
+      #winetricks
+
+      ## native wayland support (unstable)
+      #wineWowPackages.waylandFull
     ];
   };
 
@@ -111,15 +140,15 @@
 
     # This setups a SSH server. Very important if you're setting up a headless system.
     # Feel free to remove if you don't need it.
-    openssh = {
-      enable = true;
-      settings = {
-        # Forbid root login through SSH.
-        PermitRootLogin = "no";
-        # Use keys only. Remove if you want to SSH using password (not recommended)
-        PasswordAuthentication = false;
-      };
-    };
+    # openssh = {
+    #   enable = true;
+    #   settings = {
+    #     # Forbid root login through SSH.
+    #     PermitRootLogin = "no";
+    #     # Use keys only. Remove if you want to SSH using password (not recommended)
+    #     PasswordAuthentication = false;
+    #   };
+    # };
 
     xserver = {
       enable = true;
@@ -222,6 +251,7 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
       shell = pkgs.fish;
       packages = with pkgs; [
         home-manager
+        lutris
       ];
       # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
       extraGroups = ["networkmanager" "wheel" "video" "docker" "cargo"];
@@ -267,9 +297,21 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
       package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+      prime = {
+        #sync.enable = true;
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+
+        # Make sure to use the correct Bus ID values for your system!
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
     };
   };
-  services.xserver.videoDrivers = ["intel"];
+  services.xserver.videoDrivers = ["nvidia"];
 
   security.rtkit.enable = true;
 

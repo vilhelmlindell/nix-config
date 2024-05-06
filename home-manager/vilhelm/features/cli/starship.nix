@@ -1,6 +1,5 @@
-{ config, ... }: {
-  programs.starship =
-  {
+{config, ...}: {
+  programs.starship = {
     enable = true;
     settings = {
       format = "[\\[](fg:color_red)$username[@](fg:color_green)$hostname $directory[\\]](fg:color_red)$os ";
