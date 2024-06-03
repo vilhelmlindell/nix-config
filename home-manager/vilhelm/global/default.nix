@@ -66,7 +66,8 @@
 
   home.packages = with pkgs; [
     # Fonts
-    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "NerdFontsSymbolsOnly"];})
+    (pkgs.nerdfonts.override {fonts = ["JetBrainsMono" "IosevkaTerm"];})
+    comic-mono
     font-awesome
     powerline-fonts
     powerline-symbols

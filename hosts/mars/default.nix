@@ -203,16 +203,26 @@ in {
     #  };
     #};
 
-    auto-cpufreq.enable = true;
-    auto-cpufreq.settings = {
-      battery = {
-        governor = "powersave";
-        turbo = "never";
+    auto-cpufreq = {
+      enable = true;
+      settings = {
+        battery = {
+          governor = "powersave";
+          turbo = "never";
+        };
+        charger = {
+          governor = "performance";
+          turbo = "auto";
+        };
       };
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
+    };
+
+    undervolt = {
+      enable = true;
+      gpuOffset = -100;
+      coreOffset = -100;
+      uncoreOffset = -100;
+      analogioOffset = -100;
     };
   };
   programs = {

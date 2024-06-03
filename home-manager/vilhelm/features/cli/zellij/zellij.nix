@@ -1,19 +1,24 @@
-{ config, ... }:
-{
+{config, ...}: {
   #configPath = builtins.toPath "${config}/features/cli/zellij/config.kdl";
   #layoutPath = builtins.toPath "${config}/features/cli/zellij/layout.kdl";
   configPath = "/home/vilhelm/nix-config/home-manager/vilhelm/features/cli/zellij/config.kdl";
   layoutPath = "/home/vilhelm/nix-config/home-manager/vilhelm/features/cli/zellij/layout.kdl";
 
   layoutKdl = ''
+    //layout {
+    //  pane size=1 borderless=true {
+    //    plugin location="zellij:tab-bar"
+    //  }
+    //  pane
+    //  pane size=1 borderless=true {
+    //    plugin location="zellij:status-bar"
+    //  }
+    //}
     layout {
-      pane size=1 borderless=true {
-        plugin location="zellij:tab-bar"
-      }
-      pane
-      pane size=1 borderless=true {
-        plugin location="zellij:status-bar"
-      }
+        pane
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
     }
   '';
 
@@ -225,7 +230,7 @@
     //    - true
     //    - false (Default)
     //
-    // simplified_ui true
+     simplified_ui true
 
     // Choose the path to the default shell that zellij will use for opening new panes
     // Default: $SHELL
