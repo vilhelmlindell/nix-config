@@ -13,8 +13,15 @@
     ./zoxide.nix
   ];
 
+  xdg.configFile.nvim.source = ./nvim;
+
   home.packages = with pkgs; [
     #inputs.nixvim.packages."x86_64-linux".default
+    go
+    nodejs_20
+    dotnetCorePackages.sdk_8_0
+    gcc
+    neovim
     unzip
     ripgrep
     xclip
