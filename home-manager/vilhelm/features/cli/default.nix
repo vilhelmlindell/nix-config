@@ -14,11 +14,13 @@
   ];
 
   home.packages = with pkgs; [
-    inputs.nixvim.packages."x86_64-linux".default
+    #inputs.nixvim.packages."x86_64-linux".default
+    unzip
     ripgrep
     xclip
     python3
     mpv
+    feh
     zathura
     bat
     eza

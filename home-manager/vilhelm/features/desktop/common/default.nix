@@ -5,6 +5,7 @@
   ];
   home.packages = with pkgs; [
     brightnessctl
+    cutechess
     #jetbrains.idea-ultimate
   ];
 }
