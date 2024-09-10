@@ -1,0 +1,6 @@
+[submodule "home-manager/vilhelm/features/cli/nvim-config"]
+	path = home-manager/vilhelm/features/cli/nvim-config
+	url = git@github.com:vilhelmlindell/nvim-config.git
+[submodule "nvim-flake"]
+	path = nvim-flake
+	url = git@github.com:vilhelmlindell/nvim-flake.git

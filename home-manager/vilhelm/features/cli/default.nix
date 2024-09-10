@@ -13,15 +13,10 @@
     ./zoxide.nix
   ];
 
-  xdg.configFile.nvim.source = ./nvim;
-
   home.packages = with pkgs; [
     #inputs.nixvim.packages."x86_64-linux".default
+    inputs.nvim-flake.packages.${pkgs.system}.neovim
     go
-    nodejs_20
-    dotnetCorePackages.sdk_8_0
-    gcc
-    neovim
     unzip
     ripgrep
     xclip
@@ -40,6 +35,7 @@
     ripgrep
     #ag
     fzf
+    tree
     #mcfly
     #choose
     #jq
