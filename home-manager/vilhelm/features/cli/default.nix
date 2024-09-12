@@ -17,7 +17,6 @@
     #inputs.nixvim.packages."x86_64-linux".default
     inputs.nvim-flake.packages.${pkgs.system}.neovim
     go
-    gcc
     unzip
     ripgrep
     xclip
