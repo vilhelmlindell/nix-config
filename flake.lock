@@ -171,8 +171,8 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1726172661,
-        "narHash": "sha256-3Tr2bZ/2A4QVOtnpQYSIUXC4suGNC/wOfrnvYXqE4U8=",
+        "lastModified": 1726226633,
+        "narHash": "sha256-FD3eWGFcygJYbM/q++Awq4aIPEE1wWfy1JdZZNgWo4E=",
         "path": "/home/vilhelm/nix-config/nvim-flake/",
         "type": "path"
       },
