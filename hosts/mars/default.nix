@@ -161,8 +161,6 @@ in {
         defaultSession = "none+i3";
       };
 
-      xkbOptions = "ctrl:swapcaps";
-
       windowManager.i3 = {
         enable = true;
         extraPackages = with pkgs; [
@@ -223,6 +221,22 @@ in {
       coreOffset = -100;
       uncoreOffset = -100;
       analogioOffset = -100;
+    };
+
+    kanata = {
+      enable = true;
+      keyboards = {
+        at-translated-set-2-keyboard = {
+          config = ''
+            (defsrc
+              caps
+            )
+            (deflayer base
+              lctrl
+            )
+          '';
+        };
+      };
     };
   };
   programs = {
