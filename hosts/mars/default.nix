@@ -8,13 +8,22 @@
   pkgs,
   ...
 }: let
+  #nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+  #  export __NV_PRIME_RENDER_OFFLOAD=1
+  #  export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+  #  export __GLX_VENDOR_LIBRARY_NAME=nvidia
+  #  export __VK_LAYER_NV_optimus=NVIDIA_only
+  #  exec "$@"
+  #'';
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
     export __VK_LAYER_NV_optimus=NVIDIA_only
+    export LIBVA_DRIVER_NAME=nvidia
+    export NVD_BACKEND=direct
     exec "$@"
-  '';
+'';
 in {
   # You can import other NixOS modules here
   imports = [
@@ -282,15 +291,12 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
     };
   };
 
+  hardware.opengl = { enable = true; driSupport = true; driSupport32Bit = true; extraPackages = with pkgs; [ libva vaapiVdpau libvdpau-va-gl ]; }; networking.firewall.allowedTCPPorts = [ 21000 21013 ];
+
   hardware = {
+
     bluetooth.enable = true;
 
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-      #package = (import /srv/nixpkgs-mesa {}).pkgs.mesa.drivers;
-    }; # or "nvidiaLegacy470 etc.
 
     nvidia = {
       # Modesetting is required.
@@ -320,8 +326,7 @@ EFSql1ch1ub5+O8eWzPXPWTLrRZx4a";
       nvidiaSettings = true;
 
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
-
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
       prime = {
         #sync.enable = true;
         offload = {
